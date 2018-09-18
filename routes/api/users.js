@@ -10,11 +10,6 @@ const validateCredentialsInput = require("../../validation/credentials");
 
 const User = require("../../models/User");
 
-// @router    GET api/users/test
-// @desc      Tests users route
-// @access    Public
-router.get("/test", (req, res) => res.json({ msg: "User works" }));
-
 // @router    POST api/users/register
 // @desc      Register a user
 // @access    Public
