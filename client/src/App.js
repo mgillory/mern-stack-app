@@ -1,14 +1,24 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+import jwt_decode from "jwt-decode";
 
 import store from "./store";
 import "./App.css";
+import setAuthToken from "./utils/setAuthToken";
+import { setCurrentUser } from "./actions/authActions";
 import NavBar from "./components/layout/NavBar";
 import Landing from "./components/layout/Landing";
 import Footer from "./components/layout/Footer";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+
+if (localStorage.jwtToken) {
+  const token = localStorage.jwtToken;
+  setAuthToken(token);
+  const decoded = jwt_decode(token);
+  store.dispatch(setCurrentUser(decoded));
+}
 
 class App extends Component {
   render() {
