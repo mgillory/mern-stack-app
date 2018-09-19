@@ -4,8 +4,10 @@
   "description": "social network for developers",
   "main": "server.js",
   "scripts": {
+    "client-install": "cd client && yarn",
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "cd client && yarn start"
   },
   "author": "Matheus Freitas",
   "license": "MIT",
