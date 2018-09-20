@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode";
 import store from "./store";
 import "./App.css";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser } from "./actions/authActions";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
 import NavBar from "./components/layout/NavBar";
 import Landing from "./components/layout/Landing";
 import Footer from "./components/layout/Footer";
@@ -18,6 +18,10 @@ if (localStorage.jwtToken) {
   setAuthToken(token);
   const decoded = jwt_decode(token);
   store.dispatch(setCurrentUser(decoded));
+  if (decoded.exp < Date.now() / 1000) {
+    store.dispatch(logoutUser());
+    window.location.href = "/login";
+  }
 }
 
 class App extends Component {
